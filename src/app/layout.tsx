@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "aos/dist/aos.css";
+import { AOSProvider } from "@/src/components/AOSProvider";
 
 export const metadata: Metadata = {
   title: "Dominion City Church Growth Groups",
@@ -93,7 +95,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {children}
+        <AOSProvider>{children}</AOSProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `

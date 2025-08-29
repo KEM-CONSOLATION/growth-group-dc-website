@@ -49,7 +49,6 @@ export async function POST(request: Request) {
     const created = await writeClient.create(doc);
     return NextResponse.json({ ok: true, id: created._id });
   } catch (err: unknown) {
-    // Safely narrow the error type
     if (err instanceof Error) {
       return NextResponse.json({ error: err.message }, { status: 500 });
     }

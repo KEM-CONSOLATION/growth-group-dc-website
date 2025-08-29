@@ -10,7 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
-import { MapPin, Clock, Users, Phone, Mail, Search } from "lucide-react";
+import { MapPin, Clock, Users, Phone, Mail, Search, MessageCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function GroupsPage() {
   const states = [
@@ -38,6 +39,7 @@ export default function GroupsPage() {
   const groups = [
     {
       id: 1,
+      slug: "lagos-central-growth-group",
       name: "Lagos Central Growth Group",
       leader: "Pastor Sarah Johnson",
       meetingTime: "Every Tuesday at 7:00 PM",
@@ -53,6 +55,7 @@ export default function GroupsPage() {
       contact: {
         phone: "+234 802 345 6789",
         email: "lagoscentral@growthgroups.com",
+        whatsapp: "+234 802 345 6789",
       },
       image:
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
@@ -61,6 +64,7 @@ export default function GroupsPage() {
     },
     {
       id: 2,
+      slug: "abuja-government-workers-group",
       name: "Abuja Government Workers Group",
       leader: "Pastor Michael Brown",
       meetingTime: "Every Wednesday at 6:30 PM",
@@ -76,6 +80,7 @@ export default function GroupsPage() {
       contact: {
         phone: "+234 803 456 7890",
         email: "abujagov@growthgroups.com",
+        whatsapp: "+234 803 456 7890",
       },
       image:
         "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=300&fit=crop",
@@ -84,6 +89,7 @@ export default function GroupsPage() {
     },
     {
       id: 3,
+      slug: "port-harcourt-reconciliation-group",
       name: "Port Harcourt Reconciliation Group",
       leader: "Pastor Emily Davis",
       meetingTime: "Every Saturday at 10:00 AM",
@@ -99,6 +105,7 @@ export default function GroupsPage() {
       contact: {
         phone: "+234 804 567 8901",
         email: "phreconciliation@growthgroups.com",
+        whatsapp: "+234 804 567 8901",
       },
       image:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
@@ -107,6 +114,7 @@ export default function GroupsPage() {
     },
     {
       id: 4,
+      slug: "kano-cultural-bridge-group",
       name: "Kano Cultural Bridge Group",
       leader: "Pastor David Wilson",
       meetingTime: "Every Friday at 5:00 PM",
@@ -122,6 +130,7 @@ export default function GroupsPage() {
       contact: {
         phone: "+234 805 678 9012",
         email: "kanocultural@growthgroups.com",
+        whatsapp: "+234 805 678 9012",
       },
       image:
         "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=300&fit=crop",
@@ -130,6 +139,7 @@ export default function GroupsPage() {
     },
     {
       id: 5,
+      slug: "lagos-west-family-group",
       name: "Lagos West Family Group",
       leader: "Grace Okechukwu",
       meetingTime: "Every Sunday at 4:00 PM",
@@ -145,6 +155,7 @@ export default function GroupsPage() {
       contact: {
         phone: "+234 806 789 0123",
         email: "lagoswestfamily@growthgroups.com",
+        whatsapp: "+234 806 789 0123",
       },
       image:
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
@@ -153,6 +164,7 @@ export default function GroupsPage() {
     },
     {
       id: 6,
+      slug: "enugu-youth-empowerment-group",
       name: "Enugu Youth Empowerment Group",
       leader: "Daniel Adebayo",
       meetingTime: "Every Thursday at 7:00 PM",
@@ -168,6 +180,7 @@ export default function GroupsPage() {
       contact: {
         phone: "+234 807 890 1234",
         email: "enuguyouth@growthgroups.com",
+        whatsapp: "+234 807 890 1234",
       },
       image:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
@@ -218,6 +231,12 @@ export default function GroupsPage() {
     "Parenting",
   ];
 
+  const handleWhatsAppContact = (whatsapp: string, groupName: string) => {
+    const message = `Hi! I'm interested in joining the ${groupName}. Can you tell me more about the group?`;
+    const whatsappUrl = `https://wa.me/${whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       <Header />
@@ -227,10 +246,17 @@ export default function GroupsPage() {
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 
+              className="text-4xl md:text-6xl font-bold mb-6"
+              data-aos="fade-up"
+            >
               Growth Groups Directory
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+            <p 
+              className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               Find and join a Growth Group in your area to connect, grow, and
               serve together
             </p>
@@ -305,10 +331,17 @@ export default function GroupsPage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 
+              className="text-3xl font-bold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
               Available Growth Groups
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p 
+              className="text-lg text-gray-600 max-w-2xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               {filteredGroups.length} groups shown{" "}
               {selectedState !== "All" && `in ${selectedState}`}{" "}
               {selectedBranch !== "All" && `• ${selectedBranch}`}
@@ -316,10 +349,12 @@ export default function GroupsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredGroups.map((group) => (
+            {filteredGroups.map((group, index) => (
               <Card
                 key={group.id}
                 className="overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
               >
                 <div className="relative h-48">
                   <img
@@ -346,7 +381,14 @@ export default function GroupsPage() {
                 </div>
 
                 <CardHeader>
-                  <CardTitle className="text-xl">{group.name}</CardTitle>
+                  <CardTitle className="text-xl">
+                    <Link 
+                      href={`/groups/${group.slug}`}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      {group.name}
+                    </Link>
+                  </CardTitle>
                   <CardDescription className="text-base">
                     Led by {group.leader}
                   </CardDescription>
@@ -406,9 +448,27 @@ export default function GroupsPage() {
                     </div>
                   </div>
 
-                  <Button className="w-full" disabled={!group.isOpen}>
-                    {group.isOpen ? "Join Group" : "Group Full"}
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button 
+                      className="flex-1" 
+                      disabled={!group.isOpen}
+                      asChild
+                    >
+                      <Link href={`/groups/${group.slug}`}>
+                        {group.isOpen ? "View Details" : "Group Full"}
+                      </Link>
+                    </Button>
+                    {group.isOpen && (
+                      <Button 
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleWhatsAppContact(group.contact.whatsapp, group.name)}
+                        className="bg-green-600 hover:bg-green-700 text-white border-green-600"
+                      >
+                        <MessageCircle className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -420,15 +480,22 @@ export default function GroupsPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 
+              className="text-3xl font-bold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
               Find Groups Near You
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p 
+              className="text-lg text-gray-600 max-w-2xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               Interactive map showing all our Growth Groups across Nigeria
             </p>
           </div>
 
-          <Card className="p-8">
+          <Card className="p-8" data-aos="fade-up" data-aos-delay="400">
             <div className="text-center py-16">
               <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="h-12 w-12 text-blue-600" />
@@ -450,16 +517,23 @@ export default function GroupsPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 
+              className="text-3xl font-bold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
               How to Join a Growth Group
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p 
+              className="text-lg text-gray-600 max-w-2xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               Simple steps to get connected with a group in your area
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="text-center">
+            <Card className="text-center" data-aos="fade-up" data-aos-delay="100">
               <CardHeader>
                 <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
                   <Search className="h-8 w-8" />
@@ -474,7 +548,7 @@ export default function GroupsPage() {
               </CardContent>
             </Card>
 
-            <Card className="text-center">
+            <Card className="text-center" data-aos="fade-up" data-aos-delay="200">
               <CardHeader>
                 <div className="mx-auto w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 mb-4">
                   <Phone className="h-8 w-8" />
@@ -489,7 +563,7 @@ export default function GroupsPage() {
               </CardContent>
             </Card>
 
-            <Card className="text-center">
+            <Card className="text-center" data-aos="fade-up" data-aos-delay="300">
               <CardHeader>
                 <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-4">
                   <Users className="h-8 w-8" />
@@ -510,14 +584,25 @@ export default function GroupsPage() {
       {/* Call to Action */}
       <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-bold mb-4">
+          <h3 
+            className="text-3xl font-bold mb-4"
+            data-aos="fade-up"
+          >
             Can&apos;t Find the Right Group?
           </h3>
-          <p className="text-xl text-blue-100 mb-8">
+          <p 
+            className="text-xl text-blue-100 mb-8"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             We can help you start a new Growth Group or find the perfect fit for
             your needs.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div 
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
             <Button size="lg" variant="secondary">
               Start a New Group
             </Button>

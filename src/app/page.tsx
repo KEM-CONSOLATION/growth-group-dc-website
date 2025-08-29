@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/src/components/Header";
@@ -17,8 +19,11 @@ import {
   CarouselPrevious,
 } from "@/src/components/ui/carousel";
 import { Calendar, Users, BookOpen, Heart, MapPin, Clock } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const carouselItems = [
     {
       id: 1,
@@ -54,6 +59,15 @@ export default function Home() {
       ctaLink: "/events",
     },
   ];
+
+  // Autoplay functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [carouselItems.length]);
 
   const features = [
     {
@@ -117,7 +131,7 @@ export default function Home() {
       <section className="relative">
         <Carousel className="w-full">
           <CarouselContent>
-            {carouselItems.map((item) => (
+            {carouselItems.map((item, index) => (
               <CarouselItem key={item.id}>
                 <div className="relative h-[600px] w-full">
                   <Image
@@ -130,16 +144,33 @@ export default function Home() {
                   <div className="absolute inset-0 bg-black/40" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center text-white max-w-4xl mx-auto px-4">
-                      <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">
+                      <h1
+                        className="text-5xl md:text-7xl font-bold mb-4 leading-tight"
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                      >
                         {item.title}
                       </h1>
-                      <p className="text-2xl md:text-3xl text-blue-100 mb-6">
+                      <p
+                        className="text-2xl md:text-3xl text-blue-100 mb-6"
+                        data-aos="fade-up"
+                        data-aos-delay="400"
+                      >
                         {item.subtitle}
                       </p>
-                      <p className="text-lg md:text-xl text-blue-50 mb-8 max-w-2xl mx-auto">
+                      <p
+                        className="text-lg md:text-xl text-blue-50 mb-8 max-w-2xl mx-auto"
+                        data-aos="fade-up"
+                        data-aos-delay="600"
+                      >
                         {item.description}
                       </p>
-                      <Button size="lg" asChild>
+                      <Button
+                        size="lg"
+                        asChild
+                        data-aos="fade-up"
+                        data-aos-delay="800"
+                      >
                         <Link href={item.ctaLink}>{item.cta}</Link>
                       </Button>
                     </div>
@@ -156,10 +187,17 @@ export default function Home() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2
+              className="text-4xl font-bold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
               What We Offer
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               Discover the various ways you can grow spiritually and connect
               with our church community
             </p>
@@ -170,6 +208,8 @@ export default function Home() {
               <Card
                 key={index}
                 className="text-center hover:shadow-lg transition-shadow duration-300"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
               >
                 <CardHeader>
                   <div
@@ -193,19 +233,28 @@ export default function Home() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2
+              className="text-4xl font-bold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
               Upcoming Events
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               Join us for these exciting events and grow together in faith
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {upcomingEvents.map((event) => (
+            {upcomingEvents.map((event, index) => (
               <Card
                 key={event.id}
                 className="hover:shadow-lg transition-shadow duration-300"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
               >
                 <CardHeader>
                   <div className="flex items-center justify-between">
@@ -223,11 +272,11 @@ export default function Home() {
                   </div>
                   <div className="flex items-center text-gray-600">
                     <Clock className="h-4 w-4 mr-2" />
-                    {event.time}
+                    <span>{event.time}</span>
                   </div>
                   <div className="flex items-center text-gray-600">
                     <MapPin className="h-4 w-4 mr-2" />
-                    {event.location}
+                    <span>{event.location}</span>
                   </div>
                   <Button className="w-full mt-4" variant="outline">
                     Learn More
@@ -238,7 +287,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <Button size="lg" asChild>
+            <Button size="lg" asChild data-aos="fade-up" data-aos-delay="400">
               <Link href="/events">View All Events</Link>
             </Button>
           </div>
@@ -247,12 +296,22 @@ export default function Home() {
 
       <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-6">Ready to Grow Together?</h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <h2 className="text-4xl font-bold mb-6" data-aos="fade-up">
+            Ready to Grow Together?
+          </h2>
+          <p
+            className="text-xl text-blue-100 mb-8"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             Join our Growth Groups and experience the power of community, faith,
             and spiritual growth
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
             <Button size="lg" variant="secondary" asChild>
               <Link href="/join">Join a Group</Link>
             </Button>
@@ -266,14 +325,14 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+            <div data-aos="fade-up">
               <h3 className="text-xl font-bold mb-4">Growth Groups</h3>
               <p className="text-gray-400">
                 Building stronger communities through faith, fellowship, and
                 spiritual growth.
               </p>
             </div>
-            <div>
+            <div data-aos="fade-up" data-aos-delay="100">
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
@@ -310,7 +369,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div>
+            <div data-aos="fade-up" data-aos-delay="200">
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
@@ -347,7 +406,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div>
+            <div data-aos="fade-up" data-aos-delay="300">
               <h4 className="font-semibold mb-4">Connect</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>

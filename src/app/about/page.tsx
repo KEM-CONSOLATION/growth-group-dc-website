@@ -7,84 +7,48 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
-import { Heart, Users, Globe, BookOpen } from "lucide-react";
+import { Users, Heart, BookOpen, Globe, Target, Award } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutPage() {
   const values = [
     {
       icon: <Heart className="h-8 w-8" />,
-      title: "Love",
-      description:
-        "We believe in showing God's love to everyone we meet, creating a welcoming and inclusive community.",
+      title: "Love & Compassion",
+      description: "We believe in showing God's love through acts of kindness and compassion to all people.",
     },
     {
       icon: <Users className="h-8 w-8" />,
       title: "Community",
-      description:
-        "Building strong relationships and supporting one another in our faith journey and daily lives.",
+      description: "Building strong, supportive communities where everyone feels valued and included.",
     },
     {
       icon: <BookOpen className="h-8 w-8" />,
-      title: "Growth",
-      description:
-        "Encouraging continuous spiritual development through Bible study, prayer, and practical application.",
+      title: "Biblical Teaching",
+      description: "Grounding all our activities and relationships in the truth of God's Word.",
     },
     {
       icon: <Globe className="h-8 w-8" />,
-      title: "Service",
-      description:
-        "Reaching out to our local community and beyond with acts of kindness and practical help.",
+      title: "Global Impact",
+      description: "Reaching beyond our local communities to make a difference worldwide.",
+    },
+    {
+      icon: <Target className="h-8 w-8" />,
+      title: "Purpose-Driven",
+      description: "Helping people discover and fulfill their God-given purpose in life.",
+    },
+    {
+      icon: <Award className="h-8 w-8" />,
+      title: "Excellence",
+      description: "Striving for excellence in everything we do, honoring God with our best efforts.",
     },
   ];
 
-  const milestones = [
-    {
-      year: "2010",
-      title: "Church Founded",
-      description:
-        "Dominion City Church was established with a vision to transform lives through the Gospel.",
-    },
-    {
-      year: "2015",
-      title: "Growth Groups Launched",
-      description:
-        "Started our first Growth Groups to foster deeper community and spiritual growth.",
-    },
-    {
-      year: "2018",
-      title: "Multi-State Expansion",
-      description: "Extended our ministry to multiple states across Nigeria.",
-    },
-    {
-      year: "2024",
-      title: "Digital Ministry",
-      description:
-        "Launched online platforms to reach more people and provide digital resources.",
-    },
-  ];
-
-  const team = [
-    {
-      name: "Pastor John Smith",
-      role: "Senior Pastor",
-      bio: "Leading our church with over 20 years of ministry experience and a heart for community transformation.",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    },
-    {
-      name: "Sarah Johnson",
-      role: "Growth Groups Director",
-      bio: "Passionate about building authentic relationships and helping people find their place in our community.",
-      image:
-        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-    },
-    {
-      name: "Michael Brown",
-      role: "Youth Minister",
-      bio: "Dedicated to guiding young people in their faith journey and helping them discover their purpose.",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-    },
+  const stats = [
+    { number: "50+", label: "Growth Groups" },
+    { number: "1,200+", label: "Active Members" },
+    { number: "15", label: "States Covered" },
+    { number: "25+", label: "Years of Ministry" },
   ];
 
   return (
@@ -96,69 +60,126 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">About Us</h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
-              Discover the story, mission, and values that drive our church
-              community
+            <h1 
+              className="text-4xl md:text-6xl font-bold mb-6"
+              data-aos="fade-up"
+            >
+              About Growth Groups
+            </h1>
+            <p 
+              className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              Building stronger communities through faith, fellowship, and spiritual growth
             </p>
           </div>
         </div>
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-16">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
                 Our Mission
               </h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                To transform lives through the Gospel of Jesus Christ, building
-                a community of believers who love God, love people, and make
-                disciples. We are committed to spreading God&apos;s love and
-                transforming our world one life at a time.
+              <p className="text-xl text-gray-600 leading-relaxed mb-6">
+                To create vibrant, inclusive communities where people can grow in their faith, 
+                build meaningful relationships, and discover their God-given purpose through 
+                small group experiences.
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Through our Growth Groups, we create spaces where people can
-                connect deeply, grow spiritually, and serve others with their
-                unique gifts and talents.
+              <p className="text-lg text-gray-600 leading-relaxed">
+                We believe that spiritual growth happens best in community, where we can 
+                encourage one another, share our struggles and victories, and pray together 
+                as we journey through life.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <div data-aos="fade-left">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
                 Our Vision
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                To be a beacon of hope and transformation in our communities,
-                raising up leaders who will impact their families, workplaces,
-                and neighborhoods with the love and truth of Jesus Christ.
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed mb-6">
+                To see every person connected to a Growth Group where they can experience 
+                authentic community, spiritual transformation, and meaningful service.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                We envision a network of thriving groups across Nigeria and beyond, 
+                making a positive impact in communities and transforming lives through 
+                the power of faith and fellowship.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Values */}
-      <section className="py-16 bg-white">
+      {/* Stats Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Core Values
+          <div className="text-center mb-16">
+            <h2 
+              className="text-4xl font-bold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
+              Our Impact
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              The principles that guide everything we do as a church community
+            <p 
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              Numbers that tell the story of our growth and reach
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div 
+                key={stat.label}
+                className="text-center"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+              >
+                <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-lg text-gray-600">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 
+              className="text-4xl font-bold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
+              Our Core Values
+            </h2>
+            <p 
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              The principles that guide everything we do
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {values.map((value, index) => (
               <Card
-                key={index}
+                key={value.title}
                 className="text-center hover:shadow-lg transition-shadow duration-300"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
               >
                 <CardHeader>
-                  <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white mb-4">
+                  <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
                     {value.icon}
                   </div>
                   <CardTitle className="text-xl">{value.title}</CardTitle>
@@ -174,163 +195,95 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Story */}
-      <section className="py-16">
+      {/* History Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Story</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              From humble beginnings to a growing ministry that impacts
-              thousands of lives
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            {milestones.map((milestone, index) => (
-              <div
-                key={index}
-                className="flex flex-col md:flex-row items-center gap-8"
-              >
-                <div
-                  className={`flex-shrink-0 w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold ${index % 2 === 0 ? "md:order-1" : "md:order-3"}`}
-                >
-                  {milestone.year}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Our Story
+              </h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">1999 - The Beginning</h3>
+                  <p className="text-gray-600">
+                    Growth Groups started as a small Bible study in Lagos with just 12 people 
+                    who wanted to grow deeper in their faith together.
+                  </p>
                 </div>
-                <div
-                  className={`flex-1 text-center md:text-left ${index % 2 === 0 ? "md:order-2" : "md:order-2"}`}
-                >
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    {milestone.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    {milestone.description}
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">2005 - Expansion</h3>
+                  <p className="text-gray-600">
+                    We expanded to multiple locations across Lagos and began developing 
+                    our group leadership training program.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">2015 - National Reach</h3>
+                  <p className="text-gray-600">
+                    Growth Groups reached 10 states across Nigeria, establishing our 
+                    presence in major cities and communities.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">2024 - Today</h3>
+                  <p className="text-gray-600">
+                    We now have over 50 active groups across 15 states, impacting 
+                    thousands of lives and communities.
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership Team */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Leadership Team
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Meet the dedicated leaders who guide our church and Growth Groups
-              ministry
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <Card
-                key={index}
-                className="text-center hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="relative h-48">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
+            </div>
+            <div data-aos="fade-left">
+              <div className="bg-white p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Join Our Journey
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Be part of our story as we continue to grow and impact more lives 
+                  across Nigeria and beyond.
+                </p>
+                <div className="space-y-3">
+                  <Button className="w-full" asChild>
+                    <Link href="/groups">Find a Group</Link>
+                  </Button>
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link href="/leadership">Meet Our Team</Link>
+                  </Button>
                 </div>
-                <CardHeader>
-                  <CardTitle className="text-xl">{member.name}</CardTitle>
-                  <CardDescription className="text-base font-medium text-blue-600">
-                    {member.role}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 leading-relaxed">{member.bio}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What We Believe */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              What We Believe
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              The foundational truths that shape our faith and ministry
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">The Bible</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">
-                  We believe the Bible is the inspired, infallible Word of God
-                  and our final authority for faith and practice.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Salvation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">
-                  We believe salvation comes through faith in Jesus Christ
-                  alone, who died for our sins and rose again.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">The Church</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">
-                  We believe the Church is the body of Christ, called to
-                  worship, grow, and serve together.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Eternal Life</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">
-                  We believe in the resurrection of the dead and eternal life
-                  for those who believe in Christ.
-                </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-bold mb-4">Join Our Community</h3>
-          <p className="text-xl text-blue-100 mb-8">
-            Ready to be part of something bigger? Join our Growth Groups and
-            experience authentic community.
+          <h2 
+            className="text-4xl font-bold mb-6"
+            data-aos="fade-up"
+          >
+            Ready to Be Part of Our Story?
+          </h2>
+          <p 
+            className="text-xl text-blue-100 mb-8"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            Join a Growth Group today and experience the power of community, 
+            faith, and spiritual growth
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div 
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
             <Button size="lg" variant="secondary" asChild>
-              <a href="/groups">Find a Group</a>
+              <Link href="/groups">Find a Group</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="/contact">Contact Us</a>
+              <Link href="/contact">Contact Us</Link>
             </Button>
           </div>
         </div>
