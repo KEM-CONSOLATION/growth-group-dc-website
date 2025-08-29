@@ -39,10 +39,10 @@ export async function POST(request: Request) {
     };
     const created = await writeClient.create(doc);
     return NextResponse.json({ ok: true, id: created._id });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || "Unknown error" },
-      { status: 500 }
-    );
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: "Unknown error" }, { status: 500 });
   }
 }

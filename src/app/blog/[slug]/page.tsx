@@ -11,7 +11,8 @@ import { CommentForm } from "./CommentForm";
 // import { PortableText } from "@portabletext/react";
 import { formatDistanceToNow } from "date-fns";
 import { Header } from "../../../components/Header";
-import { PortableText } from "next-sanity";
+import { PortableText, PortableTextBlock } from "next-sanity";
+import { TypedObject } from "sanity";
 
 interface BlogPost {
   _id: string;
@@ -23,7 +24,7 @@ interface BlogPost {
     name: string;
     image: string;
     role: string;
-    bio: any;
+    bio: TypedObject[];
   };
   mainImage: string;
   categories: Array<{
@@ -32,7 +33,7 @@ interface BlogPost {
     color: string;
   }>;
   tags: string[];
-  body: any;
+  body: PortableTextBlock[];
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
@@ -43,6 +44,12 @@ interface BlogPostPageProps {
   params: {
     slug: string;
   };
+}
+
+interface Comment {
+  _id: string;
+  name: string;
+  message: string;
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
@@ -227,7 +234,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <p className="text-gray-500">No comments yet.</p>
           ) : (
             <ul className="space-y-4">
-              {comments.map((c: any) => (
+              {comments.map((c: Comment) => (
                 <li key={c._id} className="p-4 bg-white rounded-lg border">
                   <p className="font-medium">{c.name}</p>
                   <p className="text-gray-600 whitespace-pre-wrap">
