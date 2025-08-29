@@ -61,7 +61,6 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
     return null;
   }
 }
-
 export default async function BlogPostPage({
   params,
 }: {
