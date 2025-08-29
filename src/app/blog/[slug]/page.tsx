@@ -39,12 +39,6 @@ interface BlogPost {
   };
 }
 
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
-}
-
 interface Comment {
   _id: string;
   name: string;
@@ -61,7 +55,11 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await getBlogPost(params.slug);
 
   if (!post) {
