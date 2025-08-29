@@ -40,6 +40,12 @@ interface BlogPost {
   };
 }
 
+// interface BlogPostPageProps {
+//   params: {
+//     slug: string;
+//   };
+// }
+
 interface Comment {
   _id: string;
   name: string;
