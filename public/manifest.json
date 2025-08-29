@@ -1,0 +1,27 @@
+{
+  "name": "Dominion City Church Growth Groups",
+  "short_name": "Growth Groups",
+  "description": "Connect, grow, and serve with Dominion City Church Growth Groups",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["religion", "community", "education"],
+  "lang": "en",
+  "dir": "ltr"
+}

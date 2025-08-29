@@ -1,0 +1,40 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Build outputs
+/dist
+/.next
+/.vercel
+/.turbo
+/.cache
+/out
+
+# Sanity
+/.sanity
+
+# Logs
+/logs
+*.log
+
+# Coverage
+/coverage
+
+# Misc
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.pem
+
+# Typescript
+*.tsbuildinfo
+
+# Env files
+.env
+.env.*  
+*.local
+
+# Editors
+.vscode
+.idea
