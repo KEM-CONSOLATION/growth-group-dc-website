@@ -8,7 +8,6 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { LikeButton } from "./LikeButton";
 import { CommentForm } from "./CommentForm";
-// import { PortableText } from "@portabletext/react";
 import { formatDistanceToNow } from "date-fns";
 import { Header } from "../../../components/Header";
 import { PortableText, PortableTextBlock } from "next-sanity";
@@ -40,11 +39,11 @@ interface BlogPost {
   };
 }
 
-// interface BlogPostPageProps {
-//   params: {
-//     slug: string;
-//   };
-// }
+interface BlogPostPageProps {
+  params: {
+    slug: string;
+  };
+}
 
 interface Comment {
   _id: string;
@@ -61,11 +60,8 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
     return null;
   }
 }
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getBlogPost(params.slug);
 
   if (!post) {
