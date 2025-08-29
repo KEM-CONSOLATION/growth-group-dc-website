@@ -45,6 +45,12 @@ interface Comment {
   message: string;
 }
 
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
     const post = await sanityClient.fetch(singleBlogQuery, { slug });
@@ -55,11 +61,7 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPostPage({ params }: PageProps) {
   const post = await getBlogPost(params.slug);
 
   if (!post) {
