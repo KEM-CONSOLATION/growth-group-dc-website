@@ -46,8 +46,10 @@ export default async function DepartmentsPage({
   const departments: Department[] =
     (await sanityClient.fetch(departmentsQuery)) || [];
 
-  // Extract unique states from departments data
-  const states = [...new Set(departments.map((dept) => dept.state))].sort();
+  // Extract unique states from departments data, filtering out null/undefined values
+  const states = [...new Set(departments.map((dept) => dept.state))]
+    .filter((state) => state && state.trim() !== "")
+    .sort();
 
   // Filter departments by state if specified
   const selectedState = searchParams.state;
@@ -104,19 +106,26 @@ export default async function DepartmentsPage({
             >
               <a href="/departments">All States</a>
             </Button>
-            {states.map((state: string) => (
-              <Button
-                key={state}
-                variant={selectedState === state ? "default" : "outline"}
-                size="sm"
-                className="rounded-full"
-                asChild
-              >
-                <a href={`/departments?state=${encodeURIComponent(state)}`}>
-                  {state}
-                </a>
-              </Button>
-            ))}
+            {states.length > 0 ? (
+              states.map((state: string) => (
+                <Button
+                  key={state}
+                  variant={selectedState === state ? "default" : "outline"}
+                  size="sm"
+                  className="rounded-full"
+                  asChild
+                >
+                  <a href={`/departments?state=${encodeURIComponent(state)}`}>
+                    {state}
+                  </a>
+                </Button>
+              ))
+            ) : (
+              <div className="text-gray-500 text-sm">
+                No states available. Please add departments with state
+                information.
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -124,7 +133,19 @@ export default async function DepartmentsPage({
       {/* Departments by State */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {selectedState ? (
+          {departments.length === 0 ? (
+            <div className="text-center py-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                No Departments Found
+              </h2>
+              <p className="text-gray-600 mb-4">
+                There are currently no departments in the system.
+              </p>
+              <p className="text-sm text-gray-500">
+                Please add departments through Sanity Studio.
+              </p>
+            </div>
+          ) : selectedState ? (
             // Show departments for selected state
             <>
               <div className="text-center mb-12">
