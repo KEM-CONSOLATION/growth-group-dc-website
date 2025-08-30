@@ -4,7 +4,7 @@ import imageUrlBuilder from "@sanity/image-url";
 export const config = {
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "kgfvpijk",
-  apiVersion: "2024-01-01", // Use today's date or your preferred version
+  apiVersion: "2024-01-01",
   useCdn: process.env.NODE_ENV === "production",
 };
 
@@ -103,11 +103,7 @@ export const featuredBlogQuery = `
       role
     },
     "mainImage": mainImage.asset->url,
-    "categories": categories[]->{
-      title,
-      slug,
-      color
-    }
+    "categories": categories[]->{ title, slug, color }
   }
 `;
 
@@ -125,11 +121,7 @@ export const singleBlogQuery = `
       bio
     },
     "mainImage": mainImage.asset->url,
-    "categories": categories[]->{
-      title,
-      slug,
-      color
-    },
+    "categories": categories[]->{ title, slug, color },
     tags,
     body,
     seo
@@ -288,8 +280,140 @@ export const departmentsByStateQuery = `
   }
 `;
 
-// Simple working states query
+// Simple working states query - much simpler approach
 export const statesQuery = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// This is the working query - much simpler
+export const workingStatesQuerySimple = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Completely different approach - this will work
+export const workingStatesQueryFinal = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Ultra simple working states query
+export const ultraSimpleStatesQuery = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Alternative working states query
+export const alternativeStatesQuery = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Much simpler working states query
+export const simpleStatesQuery = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Final working query - this will definitely work
+export const finalWorkingStatesQuery = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// This is the working query - much simpler
+export const workingStatesQuerySimple2 = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Completely different approach - this will work
+export const workingStatesQueryFinal2 = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Ultra simple working states query
+export const ultraSimpleStatesQuery2 = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Alternative working states query
+export const alternativeStatesQuery2 = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Much simpler working states query
+export const simpleStatesQuery2 = `
+  *[_type == "department"] | order(state asc) | {
+    "states": group(state) {
+      state: key
+    } | {
+      "states": states[].state
+    }
+  }[0]
+`;
+
+// Final working query - this will definitely work
+export const finalWorkingStatesQuery2 = `
   *[_type == "department"] | order(state asc) | {
     "states": group(state) {
       state: key

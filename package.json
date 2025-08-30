@@ -9,7 +9,12 @@
     "start": "next start",
     "lint": "eslint",
     "studio": "sanity dev --studio studio",
-    "studio:build": "sanity build"
+    "studio:build": "sanity build",
+    "setup": "node scripts/setup.js",
+    "test:queries": "node scripts/test-queries.js",
+    "seed:events": "node scripts/seed-events.js",
+    "seed:departments": "node scripts/seed-departments.js",
+    "seed:all": "npm run seed:events && npm run seed:departments"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
