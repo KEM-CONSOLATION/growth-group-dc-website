@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
+import { Badge } from "@/src/components/ui/badge";
 import {
   Carousel,
   CarouselContent,
@@ -18,8 +19,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/src/components/ui/carousel";
-import { Calendar, Users, BookOpen, Heart, MapPin, Clock } from "lucide-react";
+import {
+  Calendar,
+  Users,
+  BookOpen,
+  Heart,
+  MapPin,
+  Clock,
+  Download,
+} from "lucide-react";
 import { useEffect, useState } from "react";
+import { config } from "@/src/lib/config";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -230,6 +240,170 @@ export default function Home() {
         </div>
       </section>
 
+      {/* YouTube Livestream Section */}
+      <section className="py-24 bg-gradient-to-r from-red-600 to-red-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4" data-aos="fade-up">
+              🎥 Live Now
+            </h2>
+            <p
+              className="text-xl text-red-100 max-w-3xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              Join us live for our Sunday service, Bible studies, and special
+              events
+            </p>
+          </div>
+
+          <div
+            className="max-w-4xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+              <iframe
+                src={config.youtube.liveStreamUrl}
+                title="Live Stream"
+                className="w-full h-full"
+                allowFullScreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
+            </div>
+
+            <div className="mt-6 text-center">
+              <p className="text-red-100 mb-4">
+                📅 Sundays at {config.serviceTimes.sunday.join(" & ")} •
+                Wednesdays at {config.serviceTimes.wednesday}
+              </p>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-red-600"
+                asChild
+              >
+                <a
+                  href={config.youtube.channelUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Subscribe to Our Channel
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Audio Messages Section */}
+      <section className="py-24 bg-gradient-to-br from-green-50 to-emerald-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2
+              className="text-4xl font-bold text-gray-900 mb-4"
+              data-aos="fade-up"
+            >
+              🎵 Audio Messages
+            </h2>
+            <p
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              Download and listen to inspiring sermons, teachings, and
+              testimonies at your convenience
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* Sample Audio Message Cards */}
+            <Card
+              className="hover:shadow-lg transition-shadow duration-300"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <Badge variant="secondary">Sermon</Badge>
+                  <div className="text-sm text-gray-500">45m</div>
+                </div>
+                <CardTitle className="text-lg">Walking in Faith</CardTitle>
+                <CardDescription>Pastor John Smith</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 text-sm mb-4">
+                  A powerful message about trusting God in difficult times and
+                  walking by faith, not by sight.
+                </p>
+                <Button className="w-full" variant="outline">
+                  <Download className="h-4 w-4 mr-2" />
+                  Download Audio
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card
+              className="hover:shadow-lg transition-shadow duration-300"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <Badge variant="secondary">Teaching</Badge>
+                  <div className="text-sm text-gray-500">32m</div>
+                </div>
+                <CardTitle className="text-lg">Prayer Principles</CardTitle>
+                <CardDescription>Dr. Sarah Johnson</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 text-sm mb-4">
+                  Learn the fundamental principles of effective prayer and how
+                  to develop a consistent prayer life.
+                </p>
+                <Button className="w-full" variant="outline">
+                  <Download className="h-4 w-4 mr-2" />
+                  Download Audio
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card
+              className="hover:shadow-lg transition-shadow duration-300"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <Badge variant="secondary">Testimony</Badge>
+                  <div className="text-sm text-gray-500">18m</div>
+                </div>
+                <CardTitle className="text-lg">
+                  God&apos;s Faithfulness
+                </CardTitle>
+                <CardDescription>Brother Michael</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 text-sm mb-4">
+                  A personal testimony of how God&apos;s faithfulness was
+                  demonstrated through challenging circumstances.
+                </p>
+                <Button className="w-full" variant="outline">
+                  <Download className="h-4 w-4 mr-2" />
+                  Download Audio
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <Button size="lg" asChild data-aos="fade-up" data-aos-delay="400">
+              <Link href="/audio-messages">View All Audio Messages</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -386,6 +560,14 @@ export default function Home() {
                     className="hover:text-white transition-colors"
                   >
                     Sermons
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/audio-messages"
+                    className="hover:text-white transition-colors"
+                  >
+                    Audio Messages
                   </Link>
                 </li>
                 <li>

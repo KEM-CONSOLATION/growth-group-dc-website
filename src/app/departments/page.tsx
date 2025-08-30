@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/src/components/ui/card";
 import { Users, Star, MapPin, Phone, Mail, MessageCircle } from "lucide-react";
-import { sanityClient, departmentsQuery, statesQuery } from "@/lib/sanity";
+import { sanityClient, departmentsQuery } from "@/lib/sanity-fixed";
 
 interface Department {
   _id: string;
@@ -43,13 +43,11 @@ export default async function DepartmentsPage({
   searchParams,
 }: DepartmentsPageProps) {
   // Fetch departments and states from Sanity
-  const [departmentsData, statesData] = await Promise.all([
-    sanityClient.fetch(departmentsQuery),
-    sanityClient.fetch(statesQuery),
-  ]);
+  const departments: Department[] =
+    (await sanityClient.fetch(departmentsQuery)) || [];
 
-  const departments: Department[] = departmentsData || [];
-  const states = statesData?.states || [];
+  // Extract unique states from departments data
+  const states = [...new Set(departments.map((dept) => dept.state))].sort();
 
   // Filter departments by state if specified
   const selectedState = searchParams.state;

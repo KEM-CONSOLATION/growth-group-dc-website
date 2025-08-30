@@ -10,6 +10,7 @@ const navigation = [
   { name: "Blog", href: "/blog" },
   { name: "Events", href: "/events" },
   { name: "Devotions", href: "/devotions" },
+  { name: "Audio Messages", href: "/audio-messages" },
   { name: "Groups", href: "/groups" },
   { name: "Departments", href: "/departments" },
   { name: "Projects", href: "/projects" },
@@ -37,7 +38,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-8">
+          <div className="hidden lg:flex lg:items-center lg:space-x-8">
             {navigation.map((item, index) => (
               <Link
                 key={item.name}
@@ -52,15 +53,8 @@ export function Header() {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex md:items-center" data-aos="fade-left">
-            <Button asChild>
-              <Link href="/join">Join a Group</Link>
-            </Button>
-          </div>
-
           {/* Mobile menu button */}
-          <div className="md:hidden" data-aos="fade-left">
+          <div className="lg:hidden" data-aos="fade-left">
             <Button
               variant="ghost"
               size="icon"
@@ -78,7 +72,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden" data-aos="fade-down">
+          <div className="lg:hidden" data-aos="fade-down">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
               {navigation.map((item, index) => (
                 <Link

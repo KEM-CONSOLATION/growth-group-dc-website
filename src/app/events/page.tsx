@@ -21,8 +21,8 @@ import {
   upcomingEventsQuery,
   pastEventsQuery,
   eventCategoriesQuery,
-} from "@/lib/sanity";
-import { urlFor } from "@/lib/sanity";
+} from "@/lib/sanity-fixed";
+import { urlFor } from "@/lib/sanity-fixed";
 
 interface Event {
   _id: string;
@@ -367,8 +367,8 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold mb-4">Want to Host an Event?</h3>
           <p className="text-xl text-blue-100 mb-8">
-            Have an idea for an event? We'd love to hear from you and help make
-            it happen!
+            Have an idea for an event? We&apos;d love to hear from you and help
+            make it happen!
           </p>
           <Button size="lg" variant="secondary" asChild>
             <a href="mailto:events@dcgrowthgroups.com">Contact Us</a>

@@ -1,4 +1,4 @@
-import { sanityClient, filteredBlogQuery } from "../../../lib/sanity";
+import { sanityClient, filteredBlogQuery } from "../../../lib/sanity-fixed";
 import { BlogCard } from "@/src/components/BlogCard";
 import { SearchBar } from "@/src/components/SearchBar";
 import { CategoryFilter } from "@/src/components/CategoryFilter";

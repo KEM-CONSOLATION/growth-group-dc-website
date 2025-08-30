@@ -3,7 +3,7 @@ import {
   singleBlogQuery,
   approvedCommentsForPostQuery,
   likesCountForPostQuery,
-} from "../../../../lib/sanity";
+} from "../../../../lib/sanity-fixed";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { LikeButton } from "./LikeButton";

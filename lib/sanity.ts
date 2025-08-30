@@ -218,8 +218,6 @@ export const eventCategoriesQuery = `
   *[_type == "event"] | order(category asc) | {
     "categories": group(category) {
       category: key
-    } | {
-      "categories": categories[].category
     }
   }[0]
 `;
@@ -288,13 +286,11 @@ export const departmentsByStateQuery = `
   }
 `;
 
-// Simple working states query
+// Working states query - proper GROQ syntax
 export const statesQuery = `
   *[_type == "department"] | order(state asc) | {
     "states": group(state) {
       state: key
-    } | {
-      "states": states[].state
     }
   }[0]
 `;

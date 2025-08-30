@@ -209,8 +209,6 @@ export const eventCategoriesQuery = `
   *[_type == "event"] | order(category asc) | {
     "categories": group(category) {
       category: key
-    } | {
-      "categories": categories[].category
     }
   }[0]
 `;
@@ -279,145 +277,102 @@ export const departmentsByStateQuery = `
   }
 `;
 
-// Simple working states query - much simpler approach
+// Working states query - proper GROQ syntax
 export const statesQuery = `
   *[_type == "department"] | order(state asc) | {
     "states": group(state) {
       state: key
-    } | {
-      "states": states[].state
     }
   }[0]
 `;
 
-// This is the working query - much simpler
-export const workingStatesQuerySimple = `
-  *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
-`;
-
-// Completely different approach - this will work
-export const workingStatesQueryFinal = `
-  *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
-`;
-
-// Ultra simple working states query
-export const ultraSimpleStatesQuery = `
-  *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
-`;
-
-// Alternative working states query
-export const alternativeStatesQuery = `
-  *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
-`;
-
-// Much simpler working states query
+// Alternative simple states query for testing
 export const simpleStatesQuery = `
   *[_type == "department"] | order(state asc) | {
     "states": group(state) {
       state: key
-    } | {
-      "states": states[].state
     }
   }[0]
 `;
 
-// Final working query - this will definitely work
-export const finalWorkingStatesQuery = `
+// Ultra simple states query - no group function
+export const ultraSimpleStatesQuery = `
   *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
+    "states": distinct(state)
   }[0]
 `;
 
-// This is the working query - much simpler
-export const workingStatesQuerySimple2 = `
+// Most basic states query possible
+export const basicStatesQuery = `
   *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
+    "states": distinct(state)
+  }
 `;
 
-// Completely different approach - this will work
-export const workingStatesQueryFinal2 = `
+// Alternative approach - get states directly
+export const directStatesQuery = `
   *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
+    "states": distinct(state)
+  }
 `;
 
-// Ultra simple working states query
-export const ultraSimpleStatesQuery2 = `
-  *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
+// Simple approach - get all departments and extract states on client
+export const clientSideStatesQuery = `
+  *[_type == "department"] | order(state asc) {
+    state
+  }
 `;
 
-// Alternative working states query
-export const alternativeStatesQuery2 = `
-  *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
+// GROQ queries for audio messages
+export const audioMessagesQuery = `
+  *[_type == "audioMessage" && isPublished == true] | order(date desc) {
+    _id,
+    title,
+    speaker,
+    date,
+    description,
+    googleDriveLink,
+    duration,
+    category,
+    tags,
+    downloadCount
+  }
 `;
 
-// Much simpler working states query
-export const simpleStatesQuery2 = `
-  *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
-    }
-  }[0]
+export const featuredAudioMessagesQuery = `
+  *[_type == "audioMessage" && isPublished == true] | order(date desc)[0...6] {
+    _id,
+    title,
+    speaker,
+    date,
+    description,
+    googleDriveLink,
+    duration,
+    category,
+    tags,
+    downloadCount
+  }
 `;
 
-// Final working query - this will definitely work
-export const finalWorkingStatesQuery2 = `
-  *[_type == "department"] | order(state asc) | {
-    "states": group(state) {
-      state: key
-    } | {
-      "states": states[].state
+export const audioMessagesByCategoryQuery = `
+  *[_type == "audioMessage" && isPublished == true && category == $category] | order(date desc) {
+    _id,
+    title,
+    speaker,
+    date,
+    description,
+    googleDriveLink,
+    duration,
+    category,
+    tags,
+    downloadCount
+  }
+`;
+
+export const audioMessageCategoriesQuery = `
+  *[_type == "audioMessage" && isPublished == true] | order(category asc) | {
+    "categories": group(category) {
+      category: key
     }
   }[0]
 `;
