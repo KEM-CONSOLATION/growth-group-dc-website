@@ -213,6 +213,13 @@ export const eventCategoriesQuery = `
   }[0]
 `;
 
+// Alternative approach - get categories directly without group function
+export const simpleEventCategoriesQuery = `
+  *[_type == "event"] | order(category asc) {
+    category
+  }
+`;
+
 export const featuredEventsQuery = `
   *[_type == "event" && featured == true && startDate > now()] | order(startDate asc)[0...3] {
     _id,

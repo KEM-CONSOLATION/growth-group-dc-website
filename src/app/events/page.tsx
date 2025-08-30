@@ -20,7 +20,6 @@ import {
   sanityClient,
   upcomingEventsQuery,
   pastEventsQuery,
-  eventCategoriesQuery,
 } from "@/lib/sanity-fixed";
 import { urlFor } from "@/lib/sanity-fixed";
 
@@ -52,16 +51,19 @@ interface EventsPageProps {
 
 export default async function EventsPage({ searchParams }: EventsPageProps) {
   // Fetch events from Sanity
-  const [upcomingEventsData, pastEventsData, categoriesData] =
-    await Promise.all([
-      sanityClient.fetch(upcomingEventsQuery),
-      sanityClient.fetch(pastEventsQuery),
-      sanityClient.fetch(eventCategoriesQuery),
-    ]);
+  const [upcomingEventsData, pastEventsData] = await Promise.all([
+    sanityClient.fetch(upcomingEventsQuery),
+    sanityClient.fetch(pastEventsQuery),
+  ]);
 
   const upcomingEvents: Event[] = upcomingEventsData || [];
   const pastEvents: Event[] = pastEventsData || [];
-  const categories = categoriesData?.categories || [];
+
+  // Extract unique categories from events data
+  const allEvents = [...upcomingEvents, ...pastEvents];
+  const categories = [
+    ...new Set(allEvents.map((event) => event.category)),
+  ].sort();
 
   // Filter events by category if specified
   const selectedCategory = searchParams.category;
