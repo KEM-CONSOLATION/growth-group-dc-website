@@ -1,9 +1,9 @@
 export const config = {
   youtube: {
-    channelId: "YOUR_ACTUAL_CHANNEL_ID", // Replace with your actual YouTube channel ID (not handle)
+    channelId: "UCLrBzDNqm1pCxFjFqy3yQPA", // Replace with your actual YouTube channel ID (not handle)
     liveStreamUrl:
-      "https://www.youtube.com/embed/live_stream?channel=YOUR_ACTUAL_CHANNEL_ID",
-    channelUrl: "https://www.youtube.com/channel/YOUR_ACTUAL_CHANNEL_ID",
+      "https://www.youtube.com/embed/live_stream?channel=UCLrBzDNqm1pCxFjFqy3yQPA",
+    channelUrl: "https://www.youtube.com/channel/UCLrBzDNqm1pCxFjFqy3yQPA",
   },
 
   serviceTimes: {

@@ -37,13 +37,13 @@ async function testQueries() {
     {
       name: "Event Categories",
       query:
-        '*[_type == "event"] | order(category asc) | { "categories": group(category) { category: key } | { "categories": categories[].category } }[0]',
+        '*[_type == "event"] | order(category asc) | { "categories": group(category) { category: key } }[0]',
       description: "Get unique event categories",
     },
     {
       name: "Departments by State",
       query:
-        '*[_type == "department"] | order(state asc) | { "states": group(state) { state: key } | { "states": states[].state } }[0]',
+        '*[_type == "department"] | order(state asc) | { "states": group(state) { state: key } }[0]',
       description: "Get unique states from departments",
     },
     {

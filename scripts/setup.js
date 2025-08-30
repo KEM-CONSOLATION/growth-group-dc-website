@@ -25,7 +25,7 @@ async function testConnection() {
 
     // Test categories with simpler query
     const categories = await client.fetch(
-      '*[_type == "event"] | order(category asc) | { "categories": group(category) { category: key } | { "categories": categories[].category } }[0]'
+      '*[_type == "event"] | order(category asc) | { "categories": group(category) { category: key } }[0]'
     );
     console.log(
       `📊 Available event categories: ${categories?.categories?.join(", ") || "None"}`
