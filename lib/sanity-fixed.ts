@@ -12,7 +12,6 @@ export const sanityClient = createClient(config);
 
 const builder = imageUrlBuilder(sanityClient);
 
-// Define proper types for Sanity image sources
 export interface SanityImageSource {
   asset: {
     _ref: string;
