@@ -62,7 +62,11 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
   // Extract unique categories from events data
   const allEvents = [...upcomingEvents, ...pastEvents];
   const categories = [
-    ...new Set(allEvents.map((event) => event.category)),
+    ...new Set(
+      allEvents
+        .map((event) => event.category)
+        .filter((category) => category && category.trim() !== "")
+    ),
   ].sort();
 
   // Filter events by category if specified
