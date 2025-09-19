@@ -32,6 +32,7 @@ const Carousel = React.forwardRef<
       loop?: boolean;
     };
   }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(({ orientation = "horizontal", className, children, ...props }, ref) => {
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
   const [canScrollNext, setCanScrollNext] = React.useState(false);
