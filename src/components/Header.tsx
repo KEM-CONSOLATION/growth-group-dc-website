@@ -14,6 +14,7 @@ const navigation = [
   { name: "Groups", href: "/groups" },
   { name: "Departments", href: "/departments" },
   { name: "Projects", href: "/projects" },
+  { name: "Weekly Reports", href: "/weekly-reports" },
   { name: "About", href: "/about" },
   { name: "Leadership", href: "/leadership" },
 ];

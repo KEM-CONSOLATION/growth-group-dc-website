@@ -8,6 +8,7 @@ import { group } from "./group";
 import { comment } from "./comment";
 import { like } from "./like";
 import { audioMessage } from "./audioMessage";
+import { weeklyReport } from "./weeklyReport";
 
 export const schemaTypes = [
   blog,
@@ -20,4 +21,5 @@ export const schemaTypes = [
   comment,
   like,
   audioMessage,
+  weeklyReport,
 ];
