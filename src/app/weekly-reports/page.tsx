@@ -20,6 +20,9 @@ import {
   Lightbulb,
   AlertCircle,
   CheckCircle,
+  Camera,
+  X,
+  Upload,
 } from "lucide-react";
 
 export default function WeeklyReportsPage() {
@@ -42,6 +45,8 @@ export default function WeeklyReportsPage() {
     challenges: "",
     nextWeekPlans: "",
     additionalNotes: "",
+    groupPhotos: [] as File[],
+    activityPhotos: [] as File[],
   });
 
   const [status, setStatus] = useState<string | null>(null);
@@ -100,6 +105,32 @@ export default function WeeklyReportsPage() {
     }
   };
 
+  const handleImageUpload = (type: 'groupPhotos' | 'activityPhotos', files: FileList | null) => {
+    if (!files) return;
+    
+    const newFiles = Array.from(files);
+    setFormData(prev => ({
+      ...prev,
+      [type]: [...prev[type], ...newFiles],
+    }));
+  };
+
+  const removeImage = (type: 'groupPhotos' | 'activityPhotos', index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      [type]: prev[type].filter((_, i) => i !== index),
+    }));
+  };
+
+  const convertFileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,10 +138,33 @@ export default function WeeklyReportsPage() {
     setStatus(null);
 
     try {
+      // Convert images to base64 for submission
+      const groupPhotosBase64 = await Promise.all(
+        formData.groupPhotos.map(async (file) => ({
+          name: file.name,
+          type: file.type,
+          data: await convertFileToBase64(file),
+        }))
+      );
+
+      const activityPhotosBase64 = await Promise.all(
+        formData.activityPhotos.map(async (file) => ({
+          name: file.name,
+          type: file.type,
+          data: await convertFileToBase64(file),
+        }))
+      );
+
+      const submissionData = {
+        ...formData,
+        groupPhotos: groupPhotosBase64,
+        activityPhotos: activityPhotosBase64,
+      };
+
       const response = await fetch("/api/weekly-reports", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionData),
       });
 
       if (response.ok) {
@@ -135,6 +189,8 @@ export default function WeeklyReportsPage() {
           challenges: "",
           nextWeekPlans: "",
           additionalNotes: "",
+          groupPhotos: [],
+          activityPhotos: [],
         });
       } else {
         const error = await response.json();
@@ -368,6 +424,120 @@ export default function WeeklyReportsPage() {
                 >
                   Add Another Activity
                 </Button>
+              </div>
+
+              {/* Group Photos */}
+              <div className="space-y-6">
+                <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <Camera className="h-5 w-5" />
+                  Group Photos
+                </h3>
+                
+                <div className="space-y-4">
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload('groupPhotos', e.target.files)}
+                      className="hidden"
+                      id="group-photos-upload"
+                    />
+                    <label
+                      htmlFor="group-photos-upload"
+                      className="cursor-pointer flex flex-col items-center gap-2"
+                    >
+                      <Upload className="h-8 w-8 text-gray-400" />
+                      <span className="text-sm text-gray-600">
+                        Click to upload group photos
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        PNG, JPG, JPEG up to 10MB each
+                      </span>
+                    </label>
+                  </div>
+                  
+                  {formData.groupPhotos.length > 0 && (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {formData.groupPhotos.map((file, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={URL.createObjectURL(file)}
+                            alt={`Group photo ${index + 1}`}
+                            className="w-full h-32 object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeImage('groupPhotos', index)}
+                            className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                          <p className="text-xs text-gray-500 mt-1 truncate">
+                            {file.name}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Activity Photos */}
+              <div className="space-y-6">
+                <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <Camera className="h-5 w-5" />
+                  Activity Photos
+                </h3>
+                
+                <div className="space-y-4">
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload('activityPhotos', e.target.files)}
+                      className="hidden"
+                      id="activity-photos-upload"
+                    />
+                    <label
+                      htmlFor="activity-photos-upload"
+                      className="cursor-pointer flex flex-col items-center gap-2"
+                    >
+                      <Upload className="h-8 w-8 text-gray-400" />
+                      <span className="text-sm text-gray-600">
+                        Click to upload activity photos
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        PNG, JPG, JPEG up to 10MB each
+                      </span>
+                    </label>
+                  </div>
+                  
+                  {formData.activityPhotos.length > 0 && (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {formData.activityPhotos.map((file, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={URL.createObjectURL(file)}
+                            alt={`Activity photo ${index + 1}`}
+                            className="w-full h-32 object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeImage('activityPhotos', index)}
+                            className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                          <p className="text-xs text-gray-500 mt-1 truncate">
+                            {file.name}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
 
