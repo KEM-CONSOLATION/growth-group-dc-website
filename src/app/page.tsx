@@ -91,7 +91,7 @@ export default function Home() {
       icon: <Users className="h-8 w-8" />,
       title: "Community",
       description: "Build lasting friendships and support networks",
-      color: "from-purple-500 to-purple-600",
+      color: "from-sky-500 to-sky-600",
     },
     {
       icon: <Heart className="h-8 w-8" />,
@@ -135,7 +135,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       <Header />
 
       <section className="relative">
@@ -468,7 +468,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-24 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold mb-6" data-aos="fade-up">
             Ready to Grow Together?
