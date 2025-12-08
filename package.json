@@ -34,6 +34,7 @@
     "@sanity/code-input": "^6.0.1",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.6.0",
+    "@supabase/supabase-js": "^2.86.2",
     "@tailwindcss/typography": "^0.5.16",
     "@types/aos": "^3.0.7",
     "aos": "^2.3.4",
