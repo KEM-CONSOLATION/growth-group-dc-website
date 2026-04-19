@@ -47,7 +47,7 @@ export function CommentForm({ postId }: { postId: string }) {
       />
       <button
         type="submit"
-        className="bg-blue-600 text-white px-6 py-3 rounded-lg"
+        className="bg-brand-600 text-white px-6 py-3 rounded-lg"
       >
         Post Comment
       </button>

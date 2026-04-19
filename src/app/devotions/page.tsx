@@ -91,18 +91,18 @@ export default function DevotionsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white">
+      <section className="relative bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Daily Devotions
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
               Start each day with God&apos;s Word and find inspiration for your
               spiritual journey
             </p>
@@ -123,7 +123,7 @@ export default function DevotionsPage() {
           <Card className="max-w-4xl mx-auto">
             <CardHeader className="text-center">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                <span className="bg-brand-100 text-brand-800 px-3 py-1 rounded-full text-sm font-medium">
                   {dailyDevotions[0].category}
                 </span>
                 <span className="text-gray-500 text-sm">
@@ -155,7 +155,7 @@ export default function DevotionsPage() {
                 </p>
               </div>
 
-              <div className="bg-blue-50 p-6 rounded-lg">
+              <div className="bg-brand-50 p-6 rounded-lg">
                 <h3 className="font-semibold text-gray-900 mb-3">Prayer</h3>
                 <p className="text-gray-700 italic leading-relaxed">
                   {dailyDevotions[0].prayer}
@@ -199,7 +199,7 @@ export default function DevotionsPage() {
                 className="text-center hover:shadow-lg transition-shadow duration-300 cursor-pointer"
               >
                 <CardContent className="p-6">
-                  <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                  <div className="mx-auto w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 mb-3">
                     {category.icon}
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-1">
@@ -235,7 +235,7 @@ export default function DevotionsPage() {
               >
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">
+                    <span className="bg-brand-100 text-brand-800 px-2 py-1 rounded text-xs font-medium">
                       {devotion.category}
                     </span>
                     <span className="text-gray-500 text-sm">
@@ -313,12 +313,12 @@ export default function DevotionsPage() {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-brand-600 to-brand-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold mb-4">
             Get Daily Devotions in Your Inbox
           </h3>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Never miss a daily devotion. Subscribe to receive inspiring messages
             every morning.
           </p>
@@ -326,7 +326,7 @@ export default function DevotionsPage() {
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-300"
             />
             <Button size="lg" variant="secondary">
               Subscribe

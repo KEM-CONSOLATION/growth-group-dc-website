@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 const config: Config = {
   content: [
@@ -9,6 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          50: "#eef2fb",
+          100: "#dce4f7",
+          200: "#b8c9ef",
+          300: "#8fa6e4",
+          400: "#5b7fd4",
+          500: "#2a56b0",
+          600: "#002D8F",
+          700: "#002578",
+          800: "#001c5c",
+          900: "#001547",
+          950: "#000d2e",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -54,9 +68,9 @@ const config: Config = {
             maxWidth: "none",
             color: "#374151",
             a: {
-              color: "#2563eb",
+              color: "#002D8F",
               "&:hover": {
-                color: "#1d4ed8",
+                color: "#002578",
               },
             },
             h1: {
@@ -97,7 +111,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [typography],
 };
 
 export default config;

@@ -1,33 +1,37 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@sanity/client";
+import { createServiceRoleClient } from "@/src/lib/supabase";
+import { cloudinary } from "@/src/lib/cloudinary";
 
-const projectId =
-  process.env.SANITY_STUDIO_PROJECT_ID ||
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||
-  "kgfvpijk";
-const dataset =
-  process.env.SANITY_STUDIO_DATASET ||
-  process.env.NEXT_PUBLIC_SANITY_DATASET ||
-  "production";
-const token = process.env.SANITY_API_TOKEN;
+type PhotoPayload = { name: string; type: string; data: string };
 
-const writeClient = createClient({
-  projectId,
-  dataset,
-  apiVersion: "2024-01-01",
-  token,
-  useCdn: false,
-});
-
-
-export async function POST(request: Request) {
-  if (!projectId || !token) {
-    return NextResponse.json(
-      { error: "Server not configured for writes" },
-      { status: 500 }
-    );
+async function uploadBase64Photo(
+  photo: PhotoPayload,
+  folder: string
+): Promise<{ url: string; bytes: number } | null> {
+  if (
+    !process.env.CLOUDINARY_CLOUD_NAME ||
+    !process.env.CLOUDINARY_API_KEY ||
+    !process.env.CLOUDINARY_API_SECRET
+  ) {
+    console.error("Cloudinary env not configured");
+    return null;
   }
 
+  try {
+    const res = await cloudinary.uploader.upload(photo.data, {
+      folder: `growth-group/${folder}`,
+      resource_type: "image",
+      use_filename: true,
+      filename_override: photo.name.replace(/[^a-zA-Z0-9._-]/g, "_"),
+    });
+    return { url: res.secure_url, bytes: res.bytes ?? 0 };
+  } catch (e) {
+    console.error("Cloudinary upload failed:", e);
+    return null;
+  }
+}
+
+export async function POST(request: Request) {
   try {
     const body = await request.json();
     const {
@@ -45,9 +49,10 @@ export async function POST(request: Request) {
       challenges,
       nextWeekPlans,
       additionalNotes,
+      groupPhotos,
+      activityPhotos,
     } = body || {};
 
-    // Validate required fields
     if (
       !groupName ||
       !groupLeader ||
@@ -65,7 +70,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validate attendance object
     if (
       typeof attendance.totalMembers !== "number" ||
       typeof attendance.presentThisWeek !== "number" ||
@@ -78,7 +82,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validate activities array
     if (!Array.isArray(activities) || activities.length === 0) {
       return NextResponse.json(
         { error: "Activities must be a non-empty array" },
@@ -86,33 +89,89 @@ export async function POST(request: Request) {
       );
     }
 
+    const admin = createServiceRoleClient();
 
-    const doc = {
-      _type: "weeklyReport",
-      groupName,
-      groupLeader,
-      leaderEmail,
-      state,
-      city,
-      weekOf,
-      attendance: {
-        totalMembers: attendance.totalMembers,
-        presentThisWeek: attendance.presentThisWeek,
-        newVisitors: attendance.newVisitors || 0,
-      },
-      activities,
-      topicsDiscussed,
-      prayerRequests: prayerRequests || "",
-      testimonies: testimonies || "",
-      challenges: challenges || "",
-      nextWeekPlans: nextWeekPlans || "",
-      additionalNotes: additionalNotes || "",
-      submittedAt: new Date().toISOString(),
-      status: "pending",
-    };
+    const { data: report, error: insertError } = await admin
+      .from("weekly_reports")
+      .insert({
+        group_name: groupName,
+        group_leader: groupLeader,
+        leader_email: leaderEmail,
+        state,
+        city,
+        week_of: weekOf,
+        total_members: attendance.totalMembers,
+        present_this_week: attendance.presentThisWeek,
+        new_visitors: attendance.newVisitors ?? 0,
+        activities: activities.filter(
+          (a: string) => typeof a === "string" && a.trim() !== ""
+        ),
+        topics_discussed: topicsDiscussed,
+        prayer_requests: prayerRequests || null,
+        testimonies: testimonies || null,
+        challenges: challenges || null,
+        next_week_plans: nextWeekPlans || null,
+        additional_notes: additionalNotes || null,
+        status: "pending",
+      })
+      .select("id")
+      .single();
 
-    const created = await writeClient.create(doc);
-    return NextResponse.json({ ok: true, id: created._id });
+    if (insertError || !report) {
+      return NextResponse.json(
+        { error: insertError?.message ?? "Failed to create report" },
+        { status: 500 }
+      );
+    }
+
+    const reportId = report.id as string;
+    const photoRows: {
+      weekly_report_id: string;
+      photo_type: string;
+      file_name: string;
+      file_url: string;
+      file_size: number | null;
+    }[] = [];
+
+    const gp = (groupPhotos || []) as PhotoPayload[];
+    const ap = (activityPhotos || []) as PhotoPayload[];
+
+    for (const p of gp) {
+      const up = await uploadBase64Photo(p, "weekly-reports/group");
+      if (up) {
+        photoRows.push({
+          weekly_report_id: reportId,
+          photo_type: "group",
+          file_name: p.name,
+          file_url: up.url,
+          file_size: up.bytes,
+        });
+      }
+    }
+
+    for (const p of ap) {
+      const up = await uploadBase64Photo(p, "weekly-reports/activity");
+      if (up) {
+        photoRows.push({
+          weekly_report_id: reportId,
+          photo_type: "activity",
+          file_name: p.name,
+          file_url: up.url,
+          file_size: up.bytes,
+        });
+      }
+    }
+
+    if (photoRows.length > 0) {
+      const { error: photosError } = await admin
+        .from("weekly_report_photos")
+        .insert(photoRows);
+      if (photosError) {
+        console.error("weekly_report_photos insert:", photosError);
+      }
+    }
+
+    return NextResponse.json({ ok: true, id: reportId });
   } catch (err: unknown) {
     if (err instanceof Error) {
       return NextResponse.json({ error: err.message }, { status: 500 });

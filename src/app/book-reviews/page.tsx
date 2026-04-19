@@ -109,18 +109,18 @@ export default function BookReviewsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white">
+      <section className="relative bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Book Reviews
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
               Discover inspiring books and join our study groups to grow
               together in faith
             </p>
@@ -183,8 +183,8 @@ export default function BookReviewsPage() {
                 </p>
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="text-center p-3 bg-blue-50 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">
+                  <div className="text-center p-3 bg-brand-50 rounded-lg">
+                    <div className="text-2xl font-bold text-brand-600">
                       {currentBook.currentReaders}
                     </div>
                     <div className="text-sm text-gray-600">Current Readers</div>
@@ -250,7 +250,7 @@ export default function BookReviewsPage() {
               >
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-brand-100 text-brand-800 px-3 py-1 rounded-full text-sm font-medium">
                       Chapter {index + 1}
                     </span>
                     <span className="text-gray-500 text-sm">
@@ -292,7 +292,7 @@ export default function BookReviewsPage() {
                 <CardHeader>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold">
+                      <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-brand-500 rounded-full flex items-center justify-center text-white font-semibold">
                         {review.member.charAt(0)}
                       </div>
                       <div>
@@ -418,12 +418,12 @@ export default function BookReviewsPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-brand-600 to-brand-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold mb-4">
             Ready to Join a Book Study?
           </h3>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Connect with fellow believers and grow together through the study of
             God&apos;s Word and inspiring Christian literature.
           </p>

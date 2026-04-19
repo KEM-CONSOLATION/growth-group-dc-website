@@ -20,7 +20,7 @@ import {
 
 export default function NotFound() {
   const quickLinks = [
-    { href: "/", label: "Home", icon: Home },
+    { href: "/home", label: "Home", icon: Home },
     { href: "/blog", label: "Blog", icon: BookOpenText },
     { href: "/events", label: "Events", icon: Calendar },
     { href: "/groups", label: "Groups", icon: Users },
@@ -28,17 +28,17 @@ export default function NotFound() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
       <main className="px-4">
         <section className="relative max-w-5xl mx-auto pt-16 pb-12">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,rgba(59,130,246,0.15),transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(168,85,247,0.15),transparent_50%)]" />
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,rgba(0,45,143,0.12),transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(0,45,143,0.08),transparent_50%)]" />
           <Card className="overflow-hidden border-none shadow-xl">
-            <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white p-10">
+            <div className="bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white p-10">
               <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">
                 Page not found
               </h1>
-              <p className="mt-3 text-blue-100 max-w-2xl">
+              <p className="mt-3 text-white/90 max-w-2xl">
                 The page you’re looking for doesn’t exist or may have moved.
                 Let’s help you find the right place.
               </p>
@@ -66,7 +66,7 @@ export default function NotFound() {
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button asChild className="flex-1">
-                  <Link href="/">
+                  <Link href="/home">
                     <Home className="h-4 w-4 mr-2" />
                     Go back home
                   </Link>

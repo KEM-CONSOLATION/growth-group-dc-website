@@ -3,30 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
-
-interface BlogPost {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  excerpt: string;
-  publishedAt: string;
-  author: {
-    name: string;
-    image: string;
-    role: string;
-  };
-  mainImage: string;
-  categories: Array<{
-    title: string;
-    slug: { current: string };
-    color: string;
-  }>;
-  tags: string[];
-  featured: boolean;
-}
+import type { BlogPostCard } from "@/src/lib/content";
 
 interface BlogCardProps {
-  post: BlogPost;
+  post: BlogPostCard;
 }
 
 export function BlogCard({ post }: BlogCardProps) {
@@ -38,9 +18,10 @@ export function BlogCard({ post }: BlogCardProps) {
     }
   };
 
+  const roleLabel = (post.author.role || "contributor").replace(/-/g, " ");
+
   return (
     <article className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-      {/* Image Container */}
       <div className="relative h-48 overflow-hidden">
         {post.mainImage ? (
           <Image
@@ -50,25 +31,23 @@ export function BlogCard({ post }: BlogCardProps) {
             className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+          <div className="w-full h-full bg-gradient-to-br from-brand-100 to-brand-100 flex items-center justify-center">
             <div className="text-4xl text-gray-400">📝</div>
           </div>
         )}
 
-        {/* Featured Badge */}
         {post.featured && (
-          <div className="absolute top-4 left-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+          <div className="absolute top-4 left-4 bg-gradient-to-r from-brand-500 to-brand-700 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
             ⭐ Featured
           </div>
         )}
 
-        {/* Categories */}
         <div className="absolute bottom-4 left-4 flex gap-2">
           {post.categories?.slice(0, 2).map((category) => (
             <span
-              key={category.slug.current}
+              key={category.slug}
               className="px-3 py-1 rounded-full text-xs font-medium text-white shadow-lg"
-              style={{ backgroundColor: category.color }}
+              style={{ backgroundColor: category.color || "#002D8F" }}
             >
               {category.title}
             </span>
@@ -76,19 +55,15 @@ export function BlogCard({ post }: BlogCardProps) {
         </div>
       </div>
 
-      {/* Content */}
       <div className="p-6">
-        {/* Title */}
-        <Link href={`/blog/${post.slug.current}`}>
-          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+        <Link href={`/blog/${post.slug}`}>
+          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors line-clamp-2">
             {post.title}
           </h3>
         </Link>
 
-        {/* Excerpt */}
         <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
 
-        {/* Author and Date */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {post.author.image ? (
@@ -100,7 +75,7 @@ export function BlogCard({ post }: BlogCardProps) {
                 className="rounded-full"
               />
             ) : (
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+              <div className="w-8 h-8 bg-gradient-to-br from-brand-400 to-brand-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
                 {post.author.name.charAt(0).toUpperCase()}
               </div>
             )}
@@ -108,9 +83,7 @@ export function BlogCard({ post }: BlogCardProps) {
               <p className="text-sm font-medium text-gray-900">
                 {post.author.name}
               </p>
-              <p className="text-xs text-gray-500 capitalize">
-                {post.author.role.replace("-", " ")}
-              </p>
+              <p className="text-xs text-gray-500 capitalize">{roleLabel}</p>
             </div>
           </div>
           <span className="text-xs text-gray-500">
@@ -118,7 +91,6 @@ export function BlogCard({ post }: BlogCardProps) {
           </span>
         </div>
 
-        {/* Tags */}
         {post.tags && post.tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
             {post.tags.slice(0, 3).map((tag) => (

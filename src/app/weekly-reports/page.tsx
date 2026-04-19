@@ -204,14 +204,14 @@ export default function WeeklyReportsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
       
       <main className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            <div className="p-3 bg-blue-100 rounded-full">
-              <FileText className="h-8 w-8 text-blue-600" />
+            <div className="p-3 bg-brand-100 rounded-full">
+              <FileText className="h-8 w-8 text-brand-600" />
             </div>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -252,7 +252,7 @@ export default function WeeklyReportsPage() {
                       value={formData.groupName}
                       onChange={(e) => handleInputChange("groupName", e.target.value)}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                       placeholder="Enter your group name"
                     />
                   </div>
@@ -266,7 +266,7 @@ export default function WeeklyReportsPage() {
                       value={formData.groupLeader}
                       onChange={(e) => handleInputChange("groupLeader", e.target.value)}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                       placeholder="Leader's full name"
                     />
                   </div>
@@ -281,7 +281,7 @@ export default function WeeklyReportsPage() {
                     value={formData.leaderEmail}
                     onChange={(e) => handleInputChange("leaderEmail", e.target.value)}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                     placeholder="leader@example.com"
                   />
                 </div>
@@ -295,7 +295,7 @@ export default function WeeklyReportsPage() {
                       value={formData.state}
                       onChange={(e) => handleInputChange("state", e.target.value)}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                     >
                       <option value="">Select State</option>
                       {nigerianStates.map((state) => (
@@ -315,7 +315,7 @@ export default function WeeklyReportsPage() {
                       value={formData.city}
                       onChange={(e) => handleInputChange("city", e.target.value)}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                       placeholder="Enter city"
                     />
                   </div>
@@ -329,7 +329,7 @@ export default function WeeklyReportsPage() {
                       value={formData.weekOf}
                       onChange={(e) => handleInputChange("weekOf", e.target.value)}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -353,7 +353,7 @@ export default function WeeklyReportsPage() {
                       value={formData.attendance.totalMembers}
                       onChange={(e) => handleInputChange("attendance.totalMembers", parseInt(e.target.value) || 0)}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                     />
                   </div>
                   
@@ -367,7 +367,7 @@ export default function WeeklyReportsPage() {
                       value={formData.attendance.presentThisWeek}
                       onChange={(e) => handleInputChange("attendance.presentThisWeek", parseInt(e.target.value) || 0)}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                     />
                   </div>
                   
@@ -380,7 +380,7 @@ export default function WeeklyReportsPage() {
                       min="0"
                       value={formData.attendance.newVisitors}
                       onChange={(e) => handleInputChange("attendance.newVisitors", parseInt(e.target.value) || 0)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -400,7 +400,7 @@ export default function WeeklyReportsPage() {
                       value={activity}
                       onChange={(e) => handleActivityChange(index, e.target.value)}
                       required
-                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                       placeholder="Describe an activity conducted this week"
                     />
                     {formData.activities.length > 1 && (
@@ -434,7 +434,7 @@ export default function WeeklyReportsPage() {
                 </h3>
                 
                 <div className="space-y-4">
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-brand-400 transition-colors">
                     <input
                       type="file"
                       multiple
@@ -491,7 +491,7 @@ export default function WeeklyReportsPage() {
                 </h3>
                 
                 <div className="space-y-4">
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-brand-400 transition-colors">
                     <input
                       type="file"
                       multiple
@@ -553,7 +553,7 @@ export default function WeeklyReportsPage() {
                   onChange={(e) => handleInputChange("topicsDiscussed", e.target.value)}
                   required
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                   placeholder="What topics, scriptures, or themes were discussed this week?"
                 />
               </div>
@@ -569,7 +569,7 @@ export default function WeeklyReportsPage() {
                   value={formData.prayerRequests}
                   onChange={(e) => handleInputChange("prayerRequests", e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                   placeholder="Any prayer requests from group members?"
                 />
               </div>
@@ -585,7 +585,7 @@ export default function WeeklyReportsPage() {
                   value={formData.testimonies}
                   onChange={(e) => handleInputChange("testimonies", e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                   placeholder="Share any testimonies or highlights from this week"
                 />
               </div>
@@ -601,7 +601,7 @@ export default function WeeklyReportsPage() {
                   value={formData.challenges}
                   onChange={(e) => handleInputChange("challenges", e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                   placeholder="Any challenges or difficulties the group faced this week?"
                 />
               </div>
@@ -617,7 +617,7 @@ export default function WeeklyReportsPage() {
                   value={formData.nextWeekPlans}
                   onChange={(e) => handleInputChange("nextWeekPlans", e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                   placeholder="What are your plans for next week?"
                 />
               </div>
@@ -632,7 +632,7 @@ export default function WeeklyReportsPage() {
                   value={formData.additionalNotes}
                   onChange={(e) => handleInputChange("additionalNotes", e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-transparent"
                   placeholder="Any other information you'd like to share?"
                 />
               </div>
@@ -665,7 +665,7 @@ export default function WeeklyReportsPage() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 text-lg"
+                  className="w-full bg-brand-600 hover:bg-brand-700 text-white py-4 text-lg"
                 >
                   {isSubmitting ? "Submitting..." : "Submit Weekly Report"}
                 </Button>
@@ -675,12 +675,12 @@ export default function WeeklyReportsPage() {
         </Card>
 
         {/* Instructions */}
-        <Card className="mt-8 bg-blue-50 border-blue-200">
+        <Card className="mt-8 bg-brand-50 border-brand-200">
           <CardContent className="pt-6">
-            <h3 className="text-lg font-semibold text-blue-900 mb-4">
+            <h3 className="text-lg font-semibold text-brand-900 mb-4">
               Submission Guidelines
             </h3>
-            <ul className="space-y-2 text-blue-800">
+            <ul className="space-y-2 text-brand-800">
               <li>• Reports should be submitted weekly, preferably by Sunday evening</li>
               <li>• All fields marked with * are required</li>
               <li>• Be as detailed as possible in your descriptions</li>

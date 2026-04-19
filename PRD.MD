@@ -6,7 +6,7 @@ Prepared by: [Your Name]
 
 1. Overview
    The Growth Group Website is a digital platform for Dominion City Church’s Growth Groups. It will serve as a hub for spiritual resources, fellowship information, events, and leadership connections, making it easy for members and visitors to engage with the church.
-   The website should be modern, mobile-first, fast, appealing, and easy to update by non-technical church staff using a CMS dashboard.
+   The website should be modern, mobile-first, fast, appealing, and easy to update by non-technical church staff using an admin dashboard backed by a managed database.
 
 2. Objectives
    Provide a central information hub for Growth Groups.
@@ -110,26 +110,36 @@ Ministries & service groups (Choir, Ushering, Media, Prayer, etc.)
 
 Description + contact details
 
-B. CMS / Dashboard
-Powered by Sanity CMS (or Strapi if needed for more flexibility)
+   B. Admin Dashboard & Content Management
+   Staff use a **custom admin dashboard** (Next.js) at `/admin`, not a third-party headless CMS studio.
 
-Admin/Editor roles for church staff
+   **Backend & API (current architecture)**
+   - **Supabase** hosts the **PostgreSQL** database, **Row Level Security (RLS)** policies, and **Supabase Auth** for administrator accounts (email/password or supported providers).
+   - **Next.js API routes** (`/api/admin/*` and selected public APIs) are the **only server-side integration** with Supabase for privileged operations. The admin UI calls these routes with a **Bearer token** from the signed-in session—not direct table access from the browser for sensitive writes.
+   - **Public pages** read published content via server-side data access (e.g. Server Components / server helpers) as defined in the app; secrets stay on the server.
+   - **Media uploads** (images, files) use **Cloudinary** (or equivalent), with upload/signing handled through API routes so keys are not exposed in the client.
 
-Ability to add/edit:
+   **Admin dashboard — home (`/admin`)**
+   - **Overview metrics**: counts for blog posts, events, groups, weekly reports, comments, and pending weekly reports (items needing review).
+   - **Quick actions**: shortcuts to create blog posts, events, and groups (where implemented).
+   - **Activity highlights**: e.g. pending reports and comment totals to guide moderation.
+   - **Navigation**: sidebar to all admin modules (see below).
 
-Blog posts
+   **Admin modules (target scope aligned with product features)**
+   - Blog posts (with authors, categories, rich content).
+   - Events.
+   - Growth groups.
+   - Departments.
+   - Weekly reports (submission/review workflow as applicable).
+   - Comments (moderation / approval as applicable).
+   - Daily devotions.
+   - Audio messages.
+   - Supporting metadata: authors, categories.
 
-Devotions
+   **Roles**
+   - Admin / Editor roles for church staff (enforced via Supabase Auth + API authorization checks; refine RLS and server checks for production).
 
-Events
-
-Pastors/Leaders/Groups info
-
-Departments
-
-Media (photos, videos)
-
-C. Optional / Future Features
+   C. Optional / Future Features
 Newsletter / Email Subscription – Weekly devotionals or announcements.
 
 Testimonials – From members about Growth Groups impact.
@@ -139,7 +149,7 @@ Volunteer / Join a Department Form – Sign-up forms for service.
 FAQs – About Growth Groups, church beliefs, meeting times, etc.
 
 PWA Features – Push notifications, offline support, “Add to Homescreen.”
-Push Notifications (PWA) → For new devotionals/events
+Push Notifications (PWA) → For new devotionals/events (implementation TBD; not tied to Firebase Cloud Messaging by default).
 
 Online Giving / Donations integration (Flutterwave/Paystack)
 
@@ -154,7 +164,7 @@ User Profiles / Membership Portal
 5. Design & UX
    Look & Feel: Warm, modern, welcoming.
 
-Colors: Dominion City theme (gold, white, navy blue, etc.)
+Colors: **Dominion City brand** — **royal blue and white** (see app theme / `tailwind` brand tokens); avoid off-brand gradients.
 
 Typography: Clean & readable fonts.
 
@@ -162,18 +172,18 @@ Mobile-first responsive design.
 
 Accessibility compliance (WCAG).
 
-6. Tech Stack Proposal
-   Frontend: Next.js (React, SEO-friendly, fast)
+6. Tech Stack (Current)
+   **Frontend:** Next.js (App Router, React, SEO-friendly).
 
-CMS: Sanity (flexible, editor-friendly, structured content)
+   **Backend / data:** **Supabase** (PostgreSQL, Auth, RLS). No Sanity; no Firebase as primary database.
 
-Database: Sanity backend (auto-handled) or Firebase for user accounts
+   **Application API:** **Next.js Route Handlers** under `/api/...` for admin and public endpoints; service-role or scoped server clients only on the server—never in client bundles.
 
-Hosting: Vercel / Netlify (auto-deploy with GitHub)
+   **Media:** **Cloudinary** (upload/sign via API routes).
 
-Auth (Future): Clerk/Auth.js (if user logins needed)
+   **Hosting:** Vercel (or equivalent) with Git-based deploys.
 
-Push Notifications: Firebase Cloud Messaging (FCM) for PWA
+   **Auth (admin):** Supabase Auth; optional future: Clerk / Auth.js if requirements change.
 
 7. KPIs (Success Metrics)
    Engagement with blog/devotions
@@ -185,17 +195,17 @@ Event attendance growth
 Returning visitors (analytics)
 
 8. Timeline (High-Level)
-   Week 1–2: Setup project, CMS schema, base frontend structure
+   Week 1–2: Setup project, database schema, base frontend structure
 
 Week 3–4: Implement features (blogs, events, devotions, groups)
 
 Week 5: Leadership & Departments sections
 
-Week 6: Styling, testing, CMS training for admins
+Week 6: Styling, testing, admin training for staff
 
 Week 7: Deploy + Launch 🎉
 
-Projects & Donations Section
+9. Projects & Donations Section (Future / Extended)
 Project Listing
 
 Each church project (e.g., building a community center, charity outreach, mission trips) gets its own card or page.

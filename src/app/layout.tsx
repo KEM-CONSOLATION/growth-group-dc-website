@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://dcgrowthgroups.com"),
   alternates: {
-    canonical: "/",
+    canonical: "/home",
   },
   openGraph: {
     title: "Dominion City Church Growth Groups",
@@ -65,6 +65,10 @@ export const metadata: Metadata = {
   verification: {
     google: "your-google-verification-code",
   },
+  icons: {
+    icon: [{ url: "/dc-logo.png", type: "image/png" }],
+    apple: "/dc-logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -76,23 +80,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#2563eb" />
+        <meta name="theme-color" content="#002D8F" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Growth Groups" />
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/icon-192x192.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/icon-192x192.png"
-        />
       </head>
       <body>
         <AOSProvider>{children}</AOSProvider>

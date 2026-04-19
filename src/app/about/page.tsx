@@ -52,11 +52,11 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white">
+      <section className="relative bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
@@ -67,7 +67,7 @@ export default function AboutPage() {
               About Growth Groups
             </h1>
             <p 
-              className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto"
+              className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto"
               data-aos="fade-up"
               data-aos-delay="200"
             >
@@ -115,7 +115,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-brand-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 
@@ -141,7 +141,7 @@ export default function AboutPage() {
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
               >
-                <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">
+                <div className="text-4xl md:text-5xl font-bold text-brand-600 mb-2">
                   {stat.number}
                 </div>
                 <div className="text-lg text-gray-600">{stat.label}</div>
@@ -179,7 +179,7 @@ export default function AboutPage() {
                 data-aos-delay={index * 100}
               >
                 <CardHeader>
-                  <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
+                  <div className="mx-auto w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 mb-4">
                     {value.icon}
                   </div>
                   <CardTitle className="text-xl">{value.title}</CardTitle>
@@ -196,7 +196,7 @@ export default function AboutPage() {
       </section>
 
       {/* History Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-brand-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
@@ -258,7 +258,7 @@ export default function AboutPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-24 bg-gradient-to-r from-brand-600 to-brand-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 
             className="text-4xl font-bold mb-6"
@@ -267,7 +267,7 @@ export default function AboutPage() {
             Ready to Be Part of Our Story?
           </h2>
           <p 
-            className="text-xl text-blue-100 mb-8"
+            className="text-xl text-white/90 mb-8"
             data-aos="fade-up"
             data-aos-delay="200"
           >

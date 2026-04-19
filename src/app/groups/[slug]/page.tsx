@@ -25,7 +25,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-// Mock data - in real app this would come from Sanity
+// Mock data — can be wired to Supabase `groups` when ready
 const groupData = {
   id: 1,
   name: "Lagos Central Growth Group",
@@ -124,11 +124,11 @@ export default function GroupDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white">
+      <section className="relative bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
@@ -139,7 +139,7 @@ export default function GroupDetailPage({
               {groupData.name}
             </h1>
             <p
-              className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto"
+              className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto"
               data-aos="fade-up"
               data-aos-delay="200"
             >
@@ -204,7 +204,7 @@ export default function GroupDetailPage({
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                    <div className="flex items-center justify-between p-4 bg-brand-50 rounded-lg">
                       <div>
                         <p className="font-semibold text-gray-900">
                           {groupData.meetingDay}s
@@ -224,7 +224,7 @@ export default function GroupDetailPage({
                           className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
                         >
                           <div className="flex items-center gap-3">
-                            <span className="text-sm font-medium text-blue-600 w-16">
+                            <span className="text-sm font-medium text-brand-600 w-16">
                               {item.time}
                             </span>
                             <span className="text-gray-700">
@@ -250,7 +250,7 @@ export default function GroupDetailPage({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                       <div className="flex items-center gap-3">
-                        <Users className="h-5 w-5 text-blue-600" />
+                        <Users className="h-5 w-5 text-brand-600" />
                         <div>
                           <p className="text-sm text-gray-500">Members</p>
                           <p className="font-medium">
@@ -259,7 +259,7 @@ export default function GroupDetailPage({
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <Tag className="h-5 w-5 text-purple-600" />
+                        <Tag className="h-5 w-5 text-brand-600" />
                         <div>
                           <p className="text-sm text-gray-500">Focus Area</p>
                           <p className="font-medium">{groupData.focus}</p>
@@ -294,7 +294,7 @@ export default function GroupDetailPage({
                       </div>
                       {groupData.isOnline && (
                         <div className="flex items-center gap-3">
-                          <MessageCircle className="h-5 w-5 text-blue-600" />
+                          <MessageCircle className="h-5 w-5 text-brand-600" />
                           <div>
                             <p className="text-sm text-gray-500">Platform</p>
                             <p className="font-medium">
@@ -405,7 +405,7 @@ export default function GroupDetailPage({
                     {groupData.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                        className="bg-brand-100 text-brand-800 px-3 py-1 rounded-full text-sm"
                       >
                         {tag}
                       </span>
@@ -428,13 +428,13 @@ export default function GroupDetailPage({
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-brand-600 to-brand-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold mb-4" data-aos="fade-up">
             Ready to Join This Group?
           </h3>
           <p
-            className="text-xl text-blue-100 mb-8"
+            className="text-xl text-white/90 mb-8"
             data-aos="fade-up"
             data-aos-delay="200"
           >

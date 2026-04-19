@@ -62,18 +62,18 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white">
+      <section className="relative bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Projects & Donations
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
               Join us in making a difference through impactful community
               projects
             </p>
@@ -99,7 +99,7 @@ export default function ProjectsPage() {
                 key={project.id}
                 className="overflow-hidden hover:shadow-lg transition-all duration-300"
               >
-                <div className="relative h-48 bg-gradient-to-br from-blue-400 to-purple-600">
+                <div className="relative h-48 bg-gradient-to-br from-brand-400 to-brand-700">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center text-white">
                       <Target className="h-16 w-16 mx-auto mb-2" />
@@ -137,7 +137,7 @@ export default function ProjectsPage() {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
+                        className="bg-gradient-to-r from-brand-500 to-brand-700 h-2 rounded-full"
                         style={{ width: `${project.progress}%` }}
                       ></div>
                     </div>
@@ -168,12 +168,12 @@ export default function ProjectsPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-brand-600 to-brand-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold mb-4">
             Ready to Make a Difference?
           </h3>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Every donation helps us create positive change in our communities.
           </p>
           <Button size="lg" variant="secondary">

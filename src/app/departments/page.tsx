@@ -8,43 +8,17 @@ import {
   CardTitle,
 } from "@/src/components/ui/card";
 import { Users, Star, MapPin, Phone, Mail, MessageCircle } from "lucide-react";
-import { sanityClient, departmentsQuery } from "@/lib/sanity-fixed";
-
-interface Department {
-  _id: string;
-  name: string;
-  state: string;
-  branch?: string;
-  description: string;
-  leader: string;
-  leaderDetails?: {
-    name?: string;
-    phone?: string;
-    whatsapp?: string;
-    email?: string;
-    bio?: string;
-    image?: string;
-  };
-  activities: string[];
-  membersCount: number;
-  maxMembers?: number;
-  image?: string;
-  meetingTime?: string;
-  meetingDay?: string;
-  isOpen: boolean;
-  tags?: string[];
-}
+import { fetchDepartments, type DepartmentRow } from "@/src/lib/content";
 
 interface DepartmentsPageProps {
-  searchParams: { state?: string };
+  searchParams: Promise<{ state?: string }>;
 }
 
 export default async function DepartmentsPage({
   searchParams,
 }: DepartmentsPageProps) {
-  // Fetch departments and states from Sanity
-  const departments: Department[] =
-    (await sanityClient.fetch(departmentsQuery)) || [];
+  const sp = await searchParams;
+  const departments: DepartmentRow[] = await fetchDepartments();
 
   // Extract unique states from departments data, filtering out null/undefined values
   const states = [...new Set(departments.map((dept) => dept.state))]
@@ -52,7 +26,7 @@ export default async function DepartmentsPage({
     .sort();
 
   // Filter departments by state if specified
-  const selectedState = searchParams.state;
+  const selectedState = sp.state;
   const filteredDepartments = selectedState
     ? departments.filter((dept) => dept.state === selectedState)
     : departments;
@@ -66,22 +40,22 @@ export default async function DepartmentsPage({
       acc[dept.state].push(dept);
       return acc;
     },
-    {} as Record<string, Department[]>
+    {} as Record<string, DepartmentRow[]>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white">
+      <section className="relative bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Church Departments
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
               Discover how you can serve and grow through our various ministry
               departments across different states and branches
             </p>
@@ -142,7 +116,7 @@ export default async function DepartmentsPage({
                 There are currently no departments in the system.
               </p>
               <p className="text-sm text-gray-500">
-                Please add departments through Sanity Studio.
+                Add departments from the admin dashboard.
               </p>
             </div>
           ) : selectedState ? (
@@ -166,7 +140,7 @@ export default async function DepartmentsPage({
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {filteredDepartments.map((dept) => (
-                    <DepartmentCard key={dept._id} department={dept} />
+                    <DepartmentCard key={dept.id} department={dept} />
                   ))}
                 </div>
               )}
@@ -192,7 +166,7 @@ export default async function DepartmentsPage({
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                       {stateDepartments.map((dept) => (
-                        <DepartmentCard key={dept._id} department={dept} />
+                        <DepartmentCard key={dept.id} department={dept} />
                       ))}
                     </div>
                   </div>
@@ -204,10 +178,10 @@ export default async function DepartmentsPage({
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-brand-600 to-brand-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold mb-4">Ready to Serve?</h3>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Join one of our ministry departments and discover the joy of serving
             God and others in your community.
           </p>
@@ -221,7 +195,7 @@ export default async function DepartmentsPage({
 }
 
 // Department Card Component
-function DepartmentCard({ department }: { department: Department }) {
+function DepartmentCard({ department }: { department: DepartmentRow }) {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
       <div className="relative h-48">
@@ -232,13 +206,13 @@ function DepartmentCard({ department }: { department: Department }) {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-            <Users className="h-16 w-16 text-blue-400" />
+          <div className="w-full h-full bg-gradient-to-br from-brand-100 to-brand-100 flex items-center justify-center">
+            <Users className="h-16 w-16 text-brand-400" />
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
         <div className="absolute bottom-4 left-4">
-          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+          <span className="bg-brand-100 text-brand-800 px-3 py-1 rounded-full text-sm font-medium">
             {department.name}
           </span>
         </div>
@@ -247,7 +221,7 @@ function DepartmentCard({ department }: { department: Department }) {
       <CardHeader>
         <CardTitle className="text-xl">{department.name}</CardTitle>
         <CardDescription className="text-base">
-          Led by {department.leader}
+          Led by {department.leader || "TBA"}
         </CardDescription>
         <div className="flex items-center text-sm text-gray-600">
           <MapPin className="h-4 w-4 mr-1" />
@@ -258,7 +232,7 @@ function DepartmentCard({ department }: { department: Department }) {
 
       <CardContent className="space-y-4">
         <p className="text-gray-700 leading-relaxed">
-          {department.description}
+          {department.description || ""}
         </p>
 
         <div className="space-y-3 text-sm text-gray-600">

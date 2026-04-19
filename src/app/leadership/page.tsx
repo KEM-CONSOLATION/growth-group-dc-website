@@ -167,18 +167,18 @@ export default function LeadershipPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-50">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white">
+      <section className="relative bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Our Leadership
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
               Meet the dedicated leaders who guide our church and Growth Groups
               ministry
             </p>
@@ -216,7 +216,7 @@ export default function LeadershipPage() {
                   <div className="md:w-2/3 p-6">
                     <CardHeader className="p-0 mb-4">
                       <CardTitle className="text-2xl">{leader.name}</CardTitle>
-                      <CardDescription className="text-lg font-medium text-blue-600">
+                      <CardDescription className="text-lg font-medium text-brand-600">
                         {leader.role}
                       </CardDescription>
                     </CardHeader>
@@ -236,7 +236,7 @@ export default function LeadershipPage() {
                         {leader.specialties.map((specialty, idx) => (
                           <span
                             key={idx}
-                            className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs"
+                            className="bg-brand-100 text-brand-800 px-2 py-1 rounded text-xs"
                           >
                             {specialty}
                           </span>
@@ -248,7 +248,7 @@ export default function LeadershipPage() {
                           <Mail className="h-4 w-4" />
                           <a
                             href={`mailto:${leader.email}`}
-                            className="hover:text-blue-600"
+                            className="hover:text-brand-600"
                           >
                             {leader.email}
                           </a>
@@ -257,7 +257,7 @@ export default function LeadershipPage() {
                           <Phone className="h-4 w-4" />
                           <a
                             href={`tel:${leader.phone}`}
-                            className="hover:text-blue-600"
+                            className="hover:text-brand-600"
                           >
                             {leader.phone}
                           </a>
@@ -304,7 +304,7 @@ export default function LeadershipPage() {
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl">{pastor.name}</CardTitle>
-                  <CardDescription className="text-base font-medium text-blue-600">
+                  <CardDescription className="text-base font-medium text-brand-600">
                     {pastor.role}
                   </CardDescription>
                 </CardHeader>
@@ -315,7 +315,7 @@ export default function LeadershipPage() {
                     {pastor.specialties.map((specialty, idx) => (
                       <span
                         key={idx}
-                        className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs"
+                        className="bg-brand-100 text-brand-800 px-2 py-1 rounded text-xs"
                       >
                         {specialty}
                       </span>
@@ -327,7 +327,7 @@ export default function LeadershipPage() {
                       <Mail className="h-4 w-4" />
                       <a
                         href={`mailto:${pastor.email}`}
-                        className="hover:text-blue-600"
+                        className="hover:text-brand-600"
                       >
                         {pastor.email}
                       </a>
@@ -371,7 +371,7 @@ export default function LeadershipPage() {
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl">{leader.name}</CardTitle>
-                  <CardDescription className="text-base font-medium text-blue-600">
+                  <CardDescription className="text-base font-medium text-brand-600">
                     {leader.role}
                   </CardDescription>
                 </CardHeader>
@@ -382,7 +382,7 @@ export default function LeadershipPage() {
                     {leader.specialties.map((specialty, idx) => (
                       <span
                         key={idx}
-                        className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs"
+                        className="bg-brand-100 text-brand-800 px-2 py-1 rounded text-xs"
                       >
                         {specialty}
                       </span>
@@ -394,7 +394,7 @@ export default function LeadershipPage() {
                       <Mail className="h-4 w-4" />
                       <a
                         href={`mailto:${leader.email}`}
-                        className="hover:text-blue-600"
+                        className="hover:text-brand-600"
                       >
                         {leader.email}
                       </a>
@@ -438,7 +438,7 @@ export default function LeadershipPage() {
                       <CardTitle className="text-xl">
                         {coordinator.name}
                       </CardTitle>
-                      <CardDescription className="text-base font-medium text-blue-600">
+                      <CardDescription className="text-base font-medium text-brand-600">
                         {coordinator.role}
                       </CardDescription>
                     </CardHeader>
@@ -463,7 +463,7 @@ export default function LeadershipPage() {
                           <Mail className="h-4 w-4" />
                           <a
                             href={`mailto:${coordinator.email}`}
-                            className="hover:text-blue-600"
+                            className="hover:text-brand-600"
                           >
                             {coordinator.email}
                           </a>
@@ -483,10 +483,10 @@ export default function LeadershipPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-brand-600 to-brand-800 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold mb-4">Join Our Leadership Team</h3>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-white/90 mb-8">
             Feel called to leadership? We&apos;re always looking for passionate
             individuals to serve in various ministry roles.
           </p>

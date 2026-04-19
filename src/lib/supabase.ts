@@ -1,28 +1,17 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  if (typeof window === 'undefined') {
-    // Server-side: throw error
-    throw new Error('Missing Supabase environment variables: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY must be set');
-  } else {
-    // Client-side: log warning but don't crash
-    console.warn('Missing Supabase environment variables');
-  }
-}
-
-// Client for client-side operations
+/** Browser / public anon client (respects RLS). */
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Server-side client (for API routes)
-export const createServerClient = () => {
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-  if (!serviceRoleKey) {
+/** Server-only: bypasses RLS. Use in API routes that must write protected rows. */
+export function createServiceRoleClient(): SupabaseClient {
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !serviceRoleKey) {
     throw new Error(
-      'Missing SUPABASE_SERVICE_ROLE_KEY. ' +
-      'Get it from: Supabase Dashboard → Settings → API → service_role key'
+      "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY"
     );
   }
   return createClient(supabaseUrl, serviceRoleKey, {
@@ -31,9 +20,8 @@ export const createServerClient = () => {
       persistSession: false,
     },
   });
-};
+}
 
-// Database types (you can generate these with Supabase CLI)
 export type Database = {
   public: {
     Tables: {
@@ -48,8 +36,11 @@ export type Database = {
           created_at: string;
           updated_at: string;
         };
-        Insert: Omit<Database['public']['Tables']['authors']['Row'], 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Database['public']['Tables']['authors']['Insert']>;
+        Insert: Omit<
+          Database["public"]["Tables"]["authors"]["Row"],
+          "id" | "created_at" | "updated_at"
+        >;
+        Update: Partial<Database["public"]["Tables"]["authors"]["Insert"]>;
       };
       blog_posts: {
         Row: {
@@ -67,11 +58,12 @@ export type Database = {
           created_at: string;
           updated_at: string;
         };
-        Insert: Omit<Database['public']['Tables']['blog_posts']['Row'], 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Database['public']['Tables']['blog_posts']['Insert']>;
+        Insert: Omit<
+          Database["public"]["Tables"]["blog_posts"]["Row"],
+          "id" | "created_at" | "updated_at"
+        >;
+        Update: Partial<Database["public"]["Tables"]["blog_posts"]["Insert"]>;
       };
-      // Add other table types as needed
     };
   };
 };
-
